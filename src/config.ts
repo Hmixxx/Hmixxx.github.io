@@ -9,17 +9,17 @@
 
 export const site = {
   /** Production origin, no trailing slash. Used for canonical links, feed, sitemap. */
-  url: 'https://example.com',
+  url: 'https://hmixxx.github.io',
   /**
    * Sub-path the site is served from: '/' for a domain of its own, '/repo' for
    * GitHub project pages (https://user.github.io/repo/).
    */
   base: '/',
-  title: 'Astro Butterfly',
+  title: 'Hmixxx 的博客',
   subtitle: '一个 Butterfly 风格的 Astro 博客主题',
   description: 'A Butterfly-style blog theme for Astro: fast, accessible, no build-time surprises.',
   keywords: ['博客', 'Astro', 'Butterfly'],
-  author: 'Your Name',
+  author: 'Hmixxx',
   email: 'you@example.com',
   /** <html lang>; the UI strings are Simplified Chinese */
   lang: 'zh-CN',
