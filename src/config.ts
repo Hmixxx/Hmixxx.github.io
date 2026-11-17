@@ -29,7 +29,7 @@ export const site = {
   /** start of the "已运行时间" counter in the aside */
   publishDate: '2024-01-01',
   logo: '/img/favicon.svg',
-  avatar: '/img/avatar.svg',
+  avatar: '/img/h_avatar.jpg',
   /** default banner for pages without their own `top_img` */
   topImg: '/img/banner.svg',
   /** cover for posts without `cover` */

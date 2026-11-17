@@ -16,3 +16,6 @@ Thumbs.db
 # generated webfont assets
 public/fonts/lxgw/
 src/theme/generated/
+
+# JetBrains IDE
+.idea/
