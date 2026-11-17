@@ -28,8 +28,8 @@ export const site = {
   since: 2024,
   /** start of the "已运行时间" counter in the aside */
   publishDate: '2024-01-01',
-  logo: '/img/favicon.svg',
-  avatar: '/img/h_avatar.jpg',
+  logo: '/img/mcdonalds_logo_icon.svg',
+  avatar: '/img/naiwa.jpg',
   /** default banner for pages without their own `top_img` */
   topImg: '/img/banner.svg',
   /** cover for posts without `cover` */
