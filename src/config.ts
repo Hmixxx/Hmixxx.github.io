@@ -65,7 +65,7 @@ export const nav: NavItem[] = [
 
 /** Round icons under the author card. `color` is the hover background. */
 export const social = [
-  { label: 'GitHub', href: 'https://github.com/', icon: 'fa6-brands:github', color: '#4078c0' },
+  { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: '/img/github.svg', color: '#ffffff' },
   { label: 'Email', href: 'mailto:you@example.com', icon: 'fa6-solid:envelope', color: '#39c7f3' },
   { label: 'RSS', href: '/atom.xml', icon: 'fa6-solid:rss', color: '#d68650' },
 ];
@@ -73,7 +73,7 @@ export const social = [
 export const aside = {
   followMe: { text: 'Follow Me', href: 'https://github.com/', icon: 'fa6-brands:github' },
   /** HTML allowed */
-  announcement: '欢迎来到 <span class="hl-label">Astro Butterfly</span>！这是一段公告，在 <code>src/config.ts</code> 里修改。',
+  announcement: '欢迎来到 <span class="hl-label">Jemix小屋</span>！这是一段公告，在 <code>src/config.ts</code> 里修改。',
   recentPosts: 5,
   categories: 8,
   tags: 30,
