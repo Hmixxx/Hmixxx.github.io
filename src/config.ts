@@ -122,7 +122,7 @@ export const comments = {
  */
 export const music = {
   /** Aside player; fill in the QQ Music playlist id when ready. */
-  aside: { id: '', server: 'tencent', type: 'playlist' },
+  aside: { id: '9803595299', server: 'tencent', type: 'playlist' },
   global: { id: '', server: 'netease', type: 'playlist' },
   api: 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r',
 };
