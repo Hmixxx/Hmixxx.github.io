@@ -65,7 +65,7 @@ export const nav: NavItem[] = [
 
 /** Round icons under the author card. `color` is the hover background. */
 export const social = [
-  { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: '/img/github.svg', color: '#ffffff' },
+  { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: 'fa6-brands:github', color: '#ffffff' },
   { label: 'Email', href: 'mailto:you@example.com', icon: 'fa6-solid:envelope', color: '#39c7f3' },
   { label: 'RSS', href: '/atom.xml', icon: 'fa6-solid:rss', color: '#d68650' },
 ];

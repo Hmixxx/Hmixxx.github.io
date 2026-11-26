@@ -13,36 +13,23 @@ jobs:
         uses: actions/checkout@v4
 
       # 1. 设置 Node 环境
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      # pnpm 10.33 requires Node.js 22.12 or later
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 22.12.0
+          cache: pnpm
 
-      # 2. 安装 pnpm
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      # 3. 获取 pnpm 缓存，加速后续构建
-      - name: Get pnpm store directory
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v4
-        name: Setup pnpm cache
-        with:
-          path: ${{ env.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      # 4. 安装依赖
+      # 2. 安装依赖（锁文件必须与 package.json 完全一致）
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      # 5. 构建网站
+      # 3. 构建网站
       - name: Build Astro site
         run: pnpm run build
 

@@ -24,7 +24,7 @@ export default defineConfig({
   integrations: [
     // must come before any MDX integration; config lives in ec.config.mjs
     expressiveCode(),
-    icon({ iconDir: 'src/theme/icons' }),
+    icon(),
   ],
   markdown: {
     processor: unified({
