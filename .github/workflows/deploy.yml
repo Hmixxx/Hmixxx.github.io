@@ -2,7 +2,7 @@ name: Deploy Astro Blog to Aliyun ECS
 
 on:
   push:
-    branches: main  # 如果你的主分支是 master，改成 master
+    branches: main
   workflow_dispatch:
 
 jobs:
@@ -12,18 +12,41 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 1. 设置 Node 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          #cache: 'npm'
 
+      # 2. 安装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      # 3. 获取 pnpm 缓存，加速后续构建
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # 4. 安装依赖
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
+      # 5. 构建网站
       - name: Build Astro site
-        run: npm run build
+        run: pnpm run build
 
+      # 6. 部署到阿里云
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@main
         env:
@@ -33,4 +56,4 @@ jobs:
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           SOURCE: "dist/"
           TARGET: ${{ secrets.TARGET_DIR }}
-          ARGS: "-rlgoDzvc -i --delete"
+          ARGS: "-rlgoDzvc -i --delete -o StrictHostKeyChecking=no"
