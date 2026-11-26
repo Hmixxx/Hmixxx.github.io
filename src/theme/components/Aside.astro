@@ -51,9 +51,9 @@ const buildDate = formatDate(new Date());
 
 <aside id="aside-content" aria-label="侧栏">
   <section class="card card-widget card-info">
-    <div class="avatar-img">
+    <a class="avatar-img" href={url('/about/')} aria-label={`查看${site.author}的关于页面`}>
       <img src={avatar.src} srcset={avatar.srcset} alt={site.author} width="110" height="110" decoding="async" />
-    </div>
+    </a>
     <div class="author-info__name">{site.author}</div>
     <div class="author-info__description">{site.description}</div>
     <div class="card-info-data">
@@ -212,6 +212,7 @@ const buildDate = formatDate(new Date());
     text-align: center;
   }
   .avatar-img {
+    display: block;
     width: 110px;
     height: 110px;
     margin: 0 auto;

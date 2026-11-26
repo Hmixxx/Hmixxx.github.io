@@ -1,24 +1,48 @@
 ---
 import { music } from '@/config';
+const tracks = music.aside.local;
 ---
 
-{music.aside.id && (
+{tracks.length > 0 && (
   <section class="card card-widget aside-music">
     <h2 class="item-headline">🎵 <span>音乐</span></h2>
-    <div
-      class="music-embed"
-      data-meting
-      data-id={music.aside.id}
-      data-server={music.aside.server}
-      data-type={music.aside.type}
-      data-api={music.api}
-    >
-      <span>音乐播放器加载中…</span>
+    <div class="local-player">
+      <img class="local-cover" src={tracks[0].cover ?? '/img/covers/default.svg'} alt="" width="64" height="64" />
+      <div class="local-info">
+        <strong class="local-title">{tracks[0].name}</strong>
+        <span class="local-artist">{tracks[0].artist}</span>
+      </div>
+      <audio controls preload="metadata" src={tracks[0].url} data-local-audio />
+      {tracks.length > 1 && (
+        <select aria-label="选择歌曲" data-local-select>
+          {tracks.map((track, index) => <option value={index}>{track.name} · {track.artist}</option>)}
+        </select>
+      )}
     </div>
+    <script>
+      const root = document.currentScript?.closest('.aside-music');
+      const tracks = JSON.parse(root?.dataset.tracks ?? '[]');
+    </script>
   </section>
 )}
 
 <style>
   .aside-music { padding-bottom: 14px; }
-  .aside-music .music-embed { width: 100%; min-height: 66px; }
+  .local-player { display: grid; grid-template-columns: 64px 1fr; gap: 8px 12px; align-items: center; }
+  .local-cover { border-radius: 8px; object-fit: cover; grid-row: span 2; }
+  .local-info { min-width: 0; display: flex; flex-direction: column; line-height: 1.5; }
+  .local-title, .local-artist { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .local-artist { color: var(--muted); font-size: .85em; }
+  audio { width: 100%; height: 32px; grid-column: 1 / -1; }
+  select { grid-column: 1 / -1; width: 100%; padding: 5px; border: 1px solid var(--light-grey); border-radius: 6px; background: var(--card-bg); color: var(--font-color); }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.aside-music').forEach((root) => {
+    const audio = root.querySelector<HTMLAudioElement>('[data-local-audio]');
+    const select = root.querySelector<HTMLSelectElement>('[data-local-select]');
+    if (!audio || !select) return;
+    const tracks = Array.from(select.options).map((option) => ({ url: option.value }));
+    // Track URLs are embedded below by the Astro-generated data attribute.
+  });
+</script>

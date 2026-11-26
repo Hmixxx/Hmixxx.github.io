@@ -16,7 +16,7 @@ export const site = {
    */
   base: '/',
   title: 'Humiux.BLOG',
-  subtitle: '一个 Butterfly 风格的 Astro 博客主题',
+  subtitle: '承认现实并不意味着放弃价值判断，恰恰相反，不自欺其人，不掩耳盗铃，才有资格讨论制度的优劣',
   description: '二进制安全研究员😘',
   keywords: ['博客', 'Astro', 'Butterfly'],
   author: 'Jemix.H',
@@ -67,7 +67,7 @@ export const social = [
   { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: 'fa6-brands:github', image: '/img/social/github.svg', color: '#ffffff' },
   { label: 'Gmail', href: 'hmixxx123286@gmail.com', icon: 'fa6-solid:envelope', image: '/img/social/gmail.svg', color: '#e4d340' },
   { label: 'Instagram', href: 'https://www.instagram.com/jemix_0111', icon: 'fa6-brands:instagram', image: '/img/social/instagram.svg', color: '#ea5770' },
-  { label: 'Steam', href: 'https://steamcommunity.com/id/example', icon: 'fa6-brands:steam', image: '/img/social/steam.svg', color: '#ffffff' },
+  { label: 'Steam', href: 'https://steamcommunity.com/profiles/76561198931518466/', icon: 'fa6-brands:steam', image: '/img/social/steam.svg', color: '#ffffff' },
   { label: 'Telegram', href: 'https://t.me/ghgmixxx5555', icon: 'fa6-brands:telegram', image: '/img/social/telegram.svg', color: '#19b4ed' },
   ,
 ];
@@ -75,7 +75,7 @@ export const social = [
 export const aside = {
   followMe: { text: 'Follow Me', href: 'https://github.com/', icon: 'fa6-brands:github' },
   /** HTML allowed */
-  announcement: '欢迎来到 <span class="hl-label">Jemix的小屋</span>!',
+  announcement: '欢迎来到 <span class="hl-label">Jemix的小屋</span>!<br>记录一些自己的笔记，后期可能会记录以下生活',
   recentPosts: 5,
   categories: 8,
   tags: 30,
@@ -121,8 +121,12 @@ export const comments = {
  * (https://github.com/injahow/meting-api) for anything serious.
  */
 export const music = {
-  /** Aside player; fill in the QQ Music playlist id when ready. */
-  aside: { id: '9803595299', server: 'tencent', type: 'playlist' },
+  /** Local music files in public/music/. Add tracks here to show the Aside player. */
+  aside: {
+    local: [
+      // { name: '歌曲名称', artist: '歌手', url: '/music/song.mp3', cover: '/img/covers/default.svg' },
+    ],
+  },
   global: { id: '', server: 'netease', type: 'playlist' },
   api: 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r',
 };
