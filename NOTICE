@@ -29,4 +29,4 @@ It includes designs, styles and assets adapted from the following projects:
 Font: src/assets/fonts/unidream-led.woff2 is a digits-only subset of "UnidreamLED",
 the LED face used by hexo-butterfly-clock. Its upstream licence could not be
 confirmed; replace it with a font you have rights to (scripts/build-led-font.py
-builds the subset from any TTF) if that matters for your use.
+builds the subset from any TTF) if that matters for your use
