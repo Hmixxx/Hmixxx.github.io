@@ -162,7 +162,7 @@ export const music = {
 | （不写） | 普通 Markdown 页面 |
 | `about` | 正文为空时显示一张作者卡片 |
 | `link` | 友链页，用 `::site{…}` 卡片列出友链，见 [写作语法](./writing.md#网站卡片) |
-| `envelope` | 留言板，带信封动画，下方是评论区 |
+| `envelope` | 留言板，带信封动画， |
 
 其他字段：`title`（页面标题）、`top_img`（顶部横幅）、`comments`（是否显示评论，默认 `true`）。
 
