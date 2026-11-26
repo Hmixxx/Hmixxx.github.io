@@ -47,7 +47,7 @@ const ogImage = new URL((await optimize(image, imagePresets.social)).src, Astro.
 ---
 
 <!doctype html>
-<html lang={site.lang} data-theme="dark" data-fallback-font={font.preload ? url('/fonts/lxgw/fallback.css') : undefined} data-body-font={font.body ? url(font.body) : undefined}>
+<html lang={site.lang} data-theme="light" data-fallback-font={font.preload ? url('/fonts/lxgw/fallback.css') : undefined} data-body-font={font.body ? url(font.body) : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -111,8 +111,8 @@ const ogImage = new URL((await optimize(image, imagePresets.social)).src, Astro.
         };
         const apply = (doc) => {
           const root = doc.documentElement;
-          // This site is intentionally locked to the dark cyber-security theme.
-          root.dataset.theme = 'dark';
+          const savedTheme = read('theme');
+          root.dataset.theme = savedTheme === 'dark' ? 'dark' : 'light';
           root.classList.toggle('hide-aside', read('aside-status') === 'hide');
         };
         apply(document);
@@ -151,6 +151,39 @@ const ogImage = new URL((await optimize(image, imagePresets.social)).src, Astro.
     <Search />
     <MusicPlayer />
 
+    <script is:inline>
+      (() => {
+        const image = new Image();
+        image.crossOrigin = 'anonymous';
+        image.onload = () => {
+          try {
+            const canvas = document.createElement('canvas');
+            const size = 32;
+            canvas.width = canvas.height = size;
+            const context = canvas.getContext('2d', { willReadFrequently: true });
+            if (!context) return;
+            context.drawImage(image, 0, 0, size, size);
+            const pixels = context.getImageData(0, 0, size, size).data;
+            let r = 0, g = 0, b = 0, count = 0;
+            for (let i = 0; i < pixels.length; i += 4) {
+              const brightness = (pixels[i] * 299 + pixels[i + 1] * 587 + pixels[i + 2] * 114) / 1000;
+              if (pixels[i + 3] > 0 && brightness > 25 && brightness < 235) {
+                r += pixels[i]; g += pixels[i + 1]; b += pixels[i + 2]; count++;
+              }
+            }
+            if (!count) return;
+            r = Math.round(r / count); g = Math.round(g / count); b = Math.round(b / count);
+            const factor = Math.max(0.65, Math.min(1.35, 150 / Math.max(r * 0.299 + g * 0.587 + b * 0.114, 1)));
+            r = Math.min(255, Math.round(r * factor));
+            g = Math.min(255, Math.round(g * factor));
+            b = Math.min(255, Math.round(b * factor));
+            // The theme uses a hand-tuned lavender accent for this wallpaper.
+            // Keep the sampling code as a fallback hook for future wallpapers.
+          } catch { /* Canvas can be unavailable or blocked by browser privacy settings. */ }
+        };
+        image.src = document.documentElement.dataset.theme === 'dark' ? '/img/backgrounds/bg-dark.png' : '/img/backgrounds/bg-light.png';
+      })();
+    </script>
     <script>
       import './scripts/main';
     </script>

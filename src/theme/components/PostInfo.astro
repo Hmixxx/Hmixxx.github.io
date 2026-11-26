@@ -90,6 +90,12 @@ const { title, date, updated, categories } = post.data;
     color: var(--white);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
   }
+  :global(:root[data-theme='light']) .post-title,
+  :global(:root[data-theme='light']) #post-meta,
+  :global(:root[data-theme='light']) #post-meta a {
+    color: #000;
+    text-shadow: none;
+  }
   #post-meta > div {
     display: flex;
     flex-wrap: wrap;

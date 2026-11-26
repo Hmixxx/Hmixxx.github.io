@@ -9,7 +9,8 @@ import Layout from '@/theme/Layout.astro';
 import Comments from '@/theme/components/Comments.astro';
 import Envelope from '@/theme/components/Envelope.astro';
 import { optimize, imagePresets } from '@/lib/images';
-import { site, aside } from '@/config';
+import { site, aside, social } from '@/config';
+import { Icon } from 'astro-icon/components';
 
 export const getStaticPaths = (async () => {
   return (await getCollection('pages')).map((page) => ({ params: { slug: page.id }, props: { page } }));
@@ -34,7 +35,14 @@ const title = titles[type ?? ''] ?? page.data.title;
           <img src={avatar?.src} srcset={avatar?.srcset} alt={site.author} width="120" height="120" />
           <h1>{site.author}</h1>
           <p>{site.subtitle}</p>
-          <a class="btn" href={aside.followMe.href} target="_blank" rel="noopener">GitHub</a>
+          <div class="about-social" aria-label="社交平台链接">
+            {social.map((s) => (
+              <a href={url(s.href)} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener" style={`--c:${s.color}`}>
+                {s.image ? <img class={`social-image social-image--${s.label.toLowerCase()}`} src={url(s.image)} alt="" aria-hidden="true" /> : <Icon name={s.icon} />}
+                <span>{s.href}</span>
+              </a>
+            ))}
+          </div>
         </div>
       )
     }
@@ -64,8 +72,43 @@ const title = titles[type ?? ''] ?? page.data.title;
     margin-top: 10px;
     font-weight: 500;
   }
-  .about-card .btn {
-    margin-top: 10px;
+  .about-social {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .about-social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    color: var(--c);
+    word-break: break-all;
+  }
+  :global(:root[data-theme='light']) .about-social a:has(.social-image--github),
+  :global(:root[data-theme='light']) .about-social a:has(.social-image--steam) {
+    color: #000;
+  }
+  :global(:root[data-theme='dark']) .about-social a:has(.social-image--github),
+  :global(:root[data-theme='dark']) .about-social a:has(.social-image--steam) {
+    color: #fff;
+  }
+  .about-social img,
+  .about-social :global(svg) {
+    flex: 0 0 auto;
+    width: 1.3em;
+    height: 1.3em;
+    object-fit: contain;
+  }
+  :global(:root[data-theme='light']) .about-social img.social-image--github,
+  :global(:root[data-theme='light']) .about-social img.social-image--steam {
+    filter: none;
+  }
+  :global(:root[data-theme='dark']) .about-social img.social-image--github,
+  :global(:root[data-theme='dark']) .about-social img.social-image--steam {
+    filter: brightness(0) invert(1);
   }
   .empty-hint {
     text-align: center;

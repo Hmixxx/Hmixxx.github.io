@@ -20,18 +20,22 @@ import { Icon } from 'astro-icon/components';
 
 <style>
   .search-dialog {
-    width: min(600px, 92vw);
-    max-height: min(80vh, 760px);
-    margin: 10vh auto auto;
+    width: min(680px, 92vw);
+    max-height: min(78vh, 760px);
+    margin: 12vh auto auto;
     padding: 0;
-    border: 0;
-    border-radius: 8px;
-    background: var(--card-solid-bg);
+    border: 1px solid color-mix(in srgb, var(--card-border) 75%, transparent);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--card-bg) 88%, transparent);
     color: var(--font-color);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    -webkit-backdrop-filter: saturate(1.5) blur(24px);
+    backdrop-filter: saturate(1.5) blur(24px);
   }
   .search-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(15, 23, 42, 0.38);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
   }
   .search-dialog[open] {
     animation: search-in 0.25s var(--ease);
@@ -45,7 +49,7 @@ import { Icon } from 'astro-icon/components';
   .search-panel {
     display: flex;
     flex-direction: column;
-    padding: 18px 22px 22px;
+    padding: 20px 22px 22px;
     max-height: inherit;
   }
   .search-header {
@@ -54,22 +58,25 @@ import { Icon } from 'astro-icon/components';
     justify-content: space-between;
   }
   .search-title {
-    font-size: 1.15em;
-    color: var(--theme-color);
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--text-highlight-color);
   }
   .search-close {
     display: grid;
     place-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--light-grey) 55%, transparent);
     color: var(--muted);
   }
   .search-close:hover { color: var(--theme-hover); }
   .search-close :global(svg) { width: 18px; height: 18px; }
   .search-form {
     position: relative;
-    margin-top: 12px;
+    margin-top: 16px;
   }
   .search-form :global(.search-icon) {
     position: absolute;
@@ -82,12 +89,19 @@ import { Icon } from 'astro-icon/components';
   }
   .search-form input {
     width: 100%;
-    padding: 6px 14px 6px 36px;
-    border: 2px solid var(--theme-color);
-    border-radius: 40px;
+    padding: 10px 14px 10px 40px;
+    border: 1px solid var(--light-grey);
+    border-radius: 10px;
     outline: none;
+    background: color-mix(in srgb, var(--card-solid-bg) 72%, transparent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) inset;
+    line-height: 1.5;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .search-form input:focus {
+    border-color: var(--theme-color);
     background: var(--card-solid-bg);
-    line-height: 1.8;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-color) 20%, transparent);
   }
   .search-stats {
     margin: 10px 4px 4px;
@@ -103,8 +117,15 @@ import { Icon } from 'astro-icon/components';
     list-style: none;
   }
   .search-results :global(li) {
-    padding: 8px 0;
-    border-bottom: 1px dashed var(--light-grey);
+    margin: 4px 0;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .search-results :global(li:hover) {
+    background: color-mix(in srgb, var(--theme-color) 9%, transparent);
+    border-color: color-mix(in srgb, var(--theme-color) 18%, transparent);
   }
   .search-results :global(a.search-result-title) {
     display: block;

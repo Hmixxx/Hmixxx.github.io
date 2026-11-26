@@ -1,0 +1,24 @@
+---
+import { music } from '@/config';
+---
+
+{music.aside.id && (
+  <section class="card card-widget aside-music">
+    <h2 class="item-headline">🎵 <span>音乐</span></h2>
+    <div
+      class="music-embed"
+      data-meting
+      data-id={music.aside.id}
+      data-server={music.aside.server}
+      data-type={music.aside.type}
+      data-api={music.api}
+    >
+      <span>音乐播放器加载中…</span>
+    </div>
+  </section>
+)}
+
+<style>
+  .aside-music { padding-bottom: 14px; }
+  .aside-music .music-embed { width: 100%; min-height: 66px; }
+</style>

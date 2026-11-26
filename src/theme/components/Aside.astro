@@ -2,6 +2,7 @@
 import { url } from '@/lib/url';
 import { Icon } from 'astro-icon/components';
 import { site, social, aside, comments, clock, features } from '@/config';
+import AsideMusic from './AsideMusic.astro';
 import ClockWidget from './ClockWidget.astro';
 import { getPosts, getTags, getCategories, postUrl, coverOf, groupByMonth } from '@/lib/posts';
 import { optimize, imagePresets } from '@/lib/images';
@@ -68,12 +69,14 @@ const buildDate = formatDate(new Date());
       {
         social.map((s) => (
           <a class="social-icon" href={url(s.href)} title={s.label} aria-label={s.label} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener" style={`--c:${s.color}`}>
-            <Icon name={s.icon} />
+            {s.image ? <img class={`social-image social-image--${s.label.toLowerCase()}`} src={url(s.image)} alt="" aria-hidden="true" /> : <Icon name={s.icon} />}
           </a>
         ))
       }
     </div>
   </section>
+
+  <AsideMusic />
 
   <section class="card card-widget card-announcement">
     <h2 class="item-headline"><Icon name="fa6-solid:bullhorn" class="announce-icon" /><span>公告</span></h2>
@@ -265,12 +268,25 @@ const buildDate = formatDate(new Date());
     color: var(--c);
     font-size: 1.4em;
   }
-  .social-icon :global(svg) {
+  .social-icon :global(svg),
+  .social-icon img {
     width: 1em;
     height: 1em;
+    object-fit: contain;
     transition: transform 0.3s;
   }
-  .social-icon:hover :global(svg) {
+  /* Brand icons adapt to the active theme: native colours on light surfaces,
+     white silhouettes on the dark glass UI. */
+  :global(:root[data-theme='light']) .social-icon img.social-image--github,
+  :global(:root[data-theme='light']) .social-icon img.social-image--steam {
+    filter: none;
+  }
+  :global(:root[data-theme='dark']) .social-icon img.social-image--github,
+  :global(:root[data-theme='dark']) .social-icon img.social-image--steam {
+    filter: brightness(0) invert(1);
+  }
+  .social-icon:hover :global(svg),
+  .social-icon:hover img {
     transform: rotate(360deg);
   }
 

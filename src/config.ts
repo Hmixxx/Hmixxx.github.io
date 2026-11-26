@@ -15,21 +15,21 @@ export const site = {
    * GitHub project pages (https://user.github.io/repo/).
    */
   base: '/',
-  title: 'Hmixxx 的博客',
+  title: 'Humiux.BLOG',
   subtitle: '一个 Butterfly 风格的 Astro 博客主题',
-  description: 'A Butterfly-style blog theme for Astro: fast, accessible, no build-time surprises.',
+  description: '二进制安全研究员😘',
   keywords: ['博客', 'Astro', 'Butterfly'],
-  author: 'Hmixxx',
-  email: 'you@example.com',
+  author: 'Jemix.H',
+  email: 'hmixxx123286@gmail.com',
   /** <html lang>; the UI strings are Simplified Chinese */
   lang: 'zh-CN',
   timezone: 'Asia/Shanghai',
   /** first year shown in the footer © */
-  since: 2024,
+  since: 2026,
   /** start of the "已运行时间" counter in the aside */
-  publishDate: '2024-01-01',
-  logo: '/img/mcdonalds_logo_icon.svg',
-  avatar: '/img/naiwa.jpg',
+  publishDate: '2026-11-26',
+  logo: '/img/FrankOcean_circle.svg',
+  avatar: '/img/avatars/naiwa.jpg',
   /** default banner for pages without their own `top_img` */
   topImg: '/img/banner.svg',
   /** cover for posts without `cover` */
@@ -60,20 +60,22 @@ export const nav: NavItem[] = [
       { label: '关于', href: '/about/', icon: 'fa6-solid:heart' },
     ],
   },
-  { label: '留言板', href: '/comments/', icon: 'fa6-solid:comment-dots' },
 ];
 
 /** Round icons under the author card. `color` is the hover background. */
 export const social = [
-  { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: 'fa6-brands:github', color: '#ffffff' },
-  { label: 'Email', href: 'mailto:you@example.com', icon: 'fa6-solid:envelope', color: '#39c7f3' },
-  { label: 'RSS', href: '/atom.xml', icon: 'fa6-solid:rss', color: '#d68650' },
+  { label: 'GitHub', href: 'https://github.com/Hmixxx', icon: 'fa6-brands:github', image: '/img/social/github.svg', color: '#ffffff' },
+  { label: 'Gmail', href: 'hmixxx123286@gmail.com', icon: 'fa6-solid:envelope', image: '/img/social/gmail.svg', color: '#e4d340' },
+  { label: 'Instagram', href: 'https://www.instagram.com/jemix_0111', icon: 'fa6-brands:instagram', image: '/img/social/instagram.svg', color: '#ea5770' },
+  { label: 'Steam', href: 'https://steamcommunity.com/id/example', icon: 'fa6-brands:steam', image: '/img/social/steam.svg', color: '#ffffff' },
+  { label: 'Telegram', href: 'https://t.me/ghgmixxx5555', icon: 'fa6-brands:telegram', image: '/img/social/telegram.svg', color: '#19b4ed' },
+  ,
 ];
 
 export const aside = {
   followMe: { text: 'Follow Me', href: 'https://github.com/', icon: 'fa6-brands:github' },
   /** HTML allowed */
-  announcement: '欢迎来到 <span class="hl-label">Jemix小屋</span>！这是一段公告，在 <code>src/config.ts</code> 里修改。',
+  announcement: '欢迎来到 <span class="hl-label">Jemix的小屋</span>!',
   recentPosts: 5,
   categories: 8,
   tags: 30,
@@ -101,7 +103,7 @@ export const clock = {
   geoHost: 'geoapi.qweather.com',
   ipLookup: ['amap', 'ipwho', 'ipsb'] as const,
   /** used when every lookup fails (or always, with `fixedLocation`) */
-  fallback: { city: '杭州市', location: '120.155070,30.274085' },
+  fallback: { city: '广州市', location: '120.155070,30.274085' },
   fixedLocation: false,
   /** minutes the weather is reused; the location is kept 6 hours */
   cacheMinutes: 30,
@@ -119,6 +121,8 @@ export const comments = {
  * (https://github.com/injahow/meting-api) for anything serious.
  */
 export const music = {
+  /** Aside player; fill in the QQ Music playlist id when ready. */
+  aside: { id: '', server: 'tencent', type: 'playlist' },
   global: { id: '', server: 'netease', type: 'playlist' },
   api: 'https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&r=:r',
 };

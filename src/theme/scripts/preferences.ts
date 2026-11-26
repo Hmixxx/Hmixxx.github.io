@@ -1,4 +1,4 @@
-import { save, toast } from './store';
+import { load, save, toast } from './store';
 
 const root = document.documentElement;
 
@@ -18,8 +18,7 @@ export function initPreferences() {
     if (!t) return;
 
     if (t.matches('[data-darkmode]')) {
-      // Dark mode is the site's only appearance; keep the control as a harmless affordance.
-      const next = 'dark';
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
       const go = () => setTheme(next);
       // smooth cross-fade where supported
       if ('startViewTransition' in document && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -46,8 +45,9 @@ export function initPreferences() {
     }
   });
 
-  // The site is intentionally locked to dark mode; ignore OS theme changes.
-  root.dataset.theme = 'dark';
+  const savedTheme = load<'light' | 'dark'>('theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') root.dataset.theme = savedTheme;
+  else root.dataset.theme = 'light';
 
   // read mode is per-page
   document.addEventListener('astro:before-swap', () => root.classList.remove('read-mode', 'rightside-config-open'));

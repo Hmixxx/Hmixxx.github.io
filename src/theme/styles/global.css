@@ -23,15 +23,16 @@
   :root {
     color-scheme: light;
     --global-font-size: 15px;
-    --font-family: 'LXGW WenKai Screen', 'LXGW WenKai Screen Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto,
-      'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', 'Segoe UI', sans-serif;
     --code-font-family: ui-monospace, 'Cascadia Code', 'JetBrains Mono', 'SF Mono', Consolas, monospace;
     --code-padding-block: 12px;
     --code-padding-inline: 16px;
 
-    --theme-color: #49b1f5;
-    --theme-hover: #ff7242;
-    --theme-soft: rgba(73, 177, 245, 0.12);
+    /* Set at runtime from the dominant colour of the active wallpaper. */
+    /* Soft lavender complements the pastel wallpaper while remaining readable. */
+    --theme-color: #8064a8;
+    --theme-hover: #684d8e;
+    --theme-soft: rgba(128, 100, 168, 0.14);
     --theme-pink: #ff7eb3;
 
     --font-color: #4c4948;
@@ -39,13 +40,12 @@
     --muted: #605b60; /* 4.6:1 on white */
     --global-bg: #f7f9fc;
 
-    /* Matrix ASCII wallpaper (public/img/bg.png). The veil is lighter than in dark
-       mode: the artwork is already dark, and cards stay readable on top of it. */
-    --page-bg: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('/img/bg.png') center / cover no-repeat fixed;
-    --card-bg: rgba(255, 255, 255, 0.86);
+    /* Light-mode wallpaper. */
+    --page-bg: url('/img/backgrounds/bg-light.png') center / cover no-repeat fixed;
+    --card-bg: rgba(255, 255, 255, 0.62);
     --card-solid-bg: #fff;
     --card-border: rgba(255, 255, 255, 0.6);
-    --nav-bg: rgba(255, 255, 255, 0.94);
+    --nav-bg: rgba(255, 255, 255, 0.78);
     /* Nav text once the bar is fixed; over the banner it is always #eee. */
     --nav-font-color: var(--font-color);
     --nav-shadow: 0 1px 0 rgba(15, 23, 42, 0.05), 0 2px 8px -4px rgba(15, 23, 42, 0.18);
@@ -53,7 +53,7 @@
     --toast-border: rgba(15, 23, 42, 0.08);
     --toast-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.3);
     --link-color: #1479bf; /* theme blue darkened to 4.6:1 on white for body links */
-    --dropdown-bg: rgba(255, 255, 255, 0.92);
+    --dropdown-bg: rgba(255, 255, 255, 0.76);
     --card-radius: 10px;
     --card-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.05);
     --card-hover-box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.09);
@@ -107,18 +107,19 @@
   :root[data-theme='dark'] {
     color-scheme: dark;
     /* Deep blue-black surfaces with cyan/teal accents for the security theme. */
-    --theme-color: #38bdf8;
-    --theme-hover: #67e8f9;
-    --theme-soft: rgba(56, 189, 248, 0.14);
+    /* Deep blue accent picked from the night mountain wallpaper. */
+    --theme-color: #4f8cff;
+    --theme-hover: #78a9ff;
+    --theme-soft: rgba(79, 140, 255, 0.2);
 
     --font-color: #cbd5e1;
     --text-highlight-color: #f1f5f9;
     --muted: #94a3b8;
-    --global-bg: #07111f;
+    --global-bg: #000000;
 
-    --page-bg: linear-gradient(rgba(3, 10, 20, 0.82), rgba(3, 10, 20, 0.88)), url('/img/bg.png') center / cover no-repeat fixed;
-    --card-bg: rgba(8, 20, 35, 0.88);
-    --card-solid-bg: #0b1728;
+    --page-bg: url('/img/backgrounds/bg-dark.png') center / cover no-repeat fixed;/* 背景*/
+    --card-bg: rgba(0, 0, 0, 0.35);
+    --card-solid-bg: #ffffff;
     --card-border: rgba(255, 255, 255, 0.06);
     --nav-bg: rgba(7, 17, 31, 0.92);
     /* Dimmer than the #eee over the banner, so dark mode shows the switch too. */
@@ -240,6 +241,8 @@
     border: 1px solid var(--card-border);
     background: var(--card-bg);
     box-shadow: var(--card-box-shadow);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
     transition: box-shadow 0.3s, background 0.3s;
   }
   .card:hover { box-shadow: var(--card-hover-box-shadow); }

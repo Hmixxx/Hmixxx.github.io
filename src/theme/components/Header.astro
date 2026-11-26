@@ -10,16 +10,15 @@ interface Props {
   topImg: ImageSource;
   title?: string;
 }
-const { kind, topImg, title } = Astro.props;
+const { kind, title } = Astro.props;
 const path = Astro.url.pathname;
 const local = url('/') === '/' ? path : '/' + path.slice(url('/').length); // path without the base
 const isActive = (href?: string) => !!href && (href === '/' ? local === '/' || local.startsWith('/page/') : local.startsWith(href));
 
-const [posts, tags, cats, top, logo, avatar] = await Promise.all([
+const [posts, tags, cats, logo, avatar] = await Promise.all([
   getPosts(),
   getTags(),
   getCategories(),
-  kind !== 'home' ? optimize(topImg, imagePresets.header) : undefined,
   optimize(site.logo, imagePresets.logo),
   optimize(site.avatar, imagePresets.avatar),
 ]);
@@ -29,7 +28,8 @@ const [posts, tags, cats, top, logo, avatar] = await Promise.all([
   id="page-header"
   class:list={[kind === 'home' ? 'not-top-img' : 'has-top-img', kind === 'post' && 'post-bg']}
 >
-  {top && <img class="top-img" src={top.src} srcset={top.srcset} sizes={top.sizes} alt="" fetchpriority="high" decoding="async" />}
+
+
   <nav id="nav" aria-label="主导航">
     <a id="blog-info" href={url('/')} aria-label={`${site.title} 首页`}>
       <img class="site-icon" src={logo.src} srcset={logo.srcset} alt="" width="36" height="36" />
@@ -129,23 +129,11 @@ const [posts, tags, cats, top, logo, avatar] = await Promise.all([
   #page-header.not-top-img { height: var(--nav-height); }
   #page-header.has-top-img {
     height: var(--header-height);
-    background: var(--theme-color);
-    isolation: isolate;
-  }
-  .top-img {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  #page-header.has-top-img::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--header-mask);
-    transition: background 0.3s;
+    background: color-mix(in srgb, var(--card-bg) 78%, transparent);
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: var(--card-box-shadow);
+    -webkit-backdrop-filter: saturate(1.4) blur(18px);
+    backdrop-filter: saturate(1.4) blur(18px);
   }
   @media (max-width: 768px) {
     #page-header.post-bg { height: 340px; }
@@ -175,8 +163,8 @@ const [posts, tags, cats, top, logo, avatar] = await Promise.all([
     transition: color 0.3s, text-shadow 0.3s;
   }
   :global(html:not(.nav-fixed)) .has-top-img #nav :is(#blog-info, .menu-link, .menu-item) {
-    color: #eee;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    color: var(--nav-font-color);
+    text-shadow: none;
   }
   :global(html.nav-fixed) #page-header #nav {
     position: fixed;
@@ -350,8 +338,13 @@ const [posts, tags, cats, top, logo, avatar] = await Promise.all([
     font-size: 2.85em;
     font-weight: 700;
     line-height: 1.5;
-    color: var(--white);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+    color: var(--text-highlight-color);
+    text-shadow: none;
+  }
+  :global(:root[data-theme='light']) #site-title,
+  :global(:root[data-theme='light']) .has-top-img #nav :is(#blog-info, .menu-link, .menu-item),
+  :global(:root[data-theme='light']) #post-info {
+    color: #000;
   }
   #post-info {
     position: absolute;
