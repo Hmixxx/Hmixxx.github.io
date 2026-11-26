@@ -16,7 +16,6 @@ import { site } from './src/config.ts';
 export default defineConfig({
   // SITE_URL / BASE_PATH let CI build a preview for another host (see .github/workflows/pages.yml)
   site: process.env.SITE_URL || site.url,
-  base: process.env.BASE_PATH || site.base,
   trailingSlash: 'always',
   build: { format: 'directory' },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
