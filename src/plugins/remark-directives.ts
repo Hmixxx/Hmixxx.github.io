@@ -223,7 +223,6 @@ export default function remarkDirectives() {
           // tag-plugins-plus site card: a.site-card > .img > img + .info > img + .title + .desc
           setH(l, 'a', { className: ['site-card'], href: attrs.url, target: '_blank', rel: 'noopener' });
           l.children = [
-            span('img', [img(attrs.screenshot ?? '', 'site-card-shot')]),
             span('info', [
               ...(attrs.avatar ? [img(attrs.avatar, 'site-card-avatar')] : []),
               span('title', [{ type: 'text', value: attrs.name ?? '' }]),
