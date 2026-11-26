@@ -106,27 +106,28 @@
    */
   :root[data-theme='dark'] {
     color-scheme: dark;
-    --theme-color: #3586b8;
-    --theme-hover: #cf805d;
-    --theme-soft: rgba(53, 134, 184, 0.16);
+    /* Deep blue-black surfaces with cyan/teal accents for the security theme. */
+    --theme-color: #38bdf8;
+    --theme-hover: #67e8f9;
+    --theme-soft: rgba(56, 189, 248, 0.14);
 
-    --font-color: rgba(255, 255, 255, 0.7);
-    --text-highlight-color: rgba(255, 255, 255, 0.9);
-    --muted: rgba(255, 255, 255, 0.55);
-    --global-bg: #0d0d0d;
+    --font-color: #cbd5e1;
+    --text-highlight-color: #f1f5f9;
+    --muted: #94a3b8;
+    --global-bg: #07111f;
 
-    --page-bg: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/img/bg.png') center / cover no-repeat fixed;
-    --card-bg: rgba(0, 0, 0, 0.72);
-    --card-solid-bg: #121212;
+    --page-bg: linear-gradient(rgba(3, 10, 20, 0.82), rgba(3, 10, 20, 0.88)), url('/img/bg.png') center / cover no-repeat fixed;
+    --card-bg: rgba(8, 20, 35, 0.88);
+    --card-solid-bg: #0b1728;
     --card-border: rgba(255, 255, 255, 0.06);
-    --nav-bg: rgba(18, 18, 18, 0.88);
+    --nav-bg: rgba(7, 17, 31, 0.92);
     /* Dimmer than the #eee over the banner, so dark mode shows the switch too. */
     --nav-font-color: rgba(255, 255, 255, 0.6);
     --nav-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 8px -4px rgba(0, 0, 0, 0.6);
     --toast-bg: rgba(31, 31, 31, 0.9);
     --toast-border: rgba(255, 255, 255, 0.08);
     --toast-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
-    --link-color: #83c9ee;
+    --link-color: #7dd3fc;
     --dropdown-bg: rgba(0, 0, 0, 0.8);
     --card-box-shadow: 0 3px 8px 6px rgba(0, 0, 0, 0.18);
     --card-hover-box-shadow: 0 3px 8px 6px rgba(0, 0, 0, 0.28);

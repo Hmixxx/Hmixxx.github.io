@@ -18,7 +18,8 @@ export function initPreferences() {
     if (!t) return;
 
     if (t.matches('[data-darkmode]')) {
-      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      // Dark mode is the site's only appearance; keep the control as a harmless affordance.
+      const next = 'dark';
       const go = () => setTheme(next);
       // smooth cross-fade where supported
       if ('startViewTransition' in document && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -45,15 +46,8 @@ export function initPreferences() {
     }
   });
 
-  // follow OS changes when the user hasn't chosen explicitly
-  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    try {
-      if (localStorage.getItem('theme')) return;
-    } catch {
-      /* ignore */
-    }
-    root.dataset.theme = e.matches ? 'dark' : 'light';
-  });
+  // The site is intentionally locked to dark mode; ignore OS theme changes.
+  root.dataset.theme = 'dark';
 
   // read mode is per-page
   document.addEventListener('astro:before-swap', () => root.classList.remove('read-mode', 'rightside-config-open'));

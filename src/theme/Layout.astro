@@ -47,7 +47,7 @@ const ogImage = new URL((await optimize(image, imagePresets.social)).src, Astro.
 ---
 
 <!doctype html>
-<html lang={site.lang} data-theme="light" data-fallback-font={font.preload ? url('/fonts/lxgw/fallback.css') : undefined} data-body-font={font.body ? url(font.body) : undefined}>
+<html lang={site.lang} data-theme="dark" data-fallback-font={font.preload ? url('/fonts/lxgw/fallback.css') : undefined} data-body-font={font.body ? url(font.body) : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -111,9 +111,8 @@ const ogImage = new URL((await optimize(image, imagePresets.social)).src, Astro.
         };
         const apply = (doc) => {
           const root = doc.documentElement;
-          const saved = read('theme');
-          const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-          root.dataset.theme = dark ? 'dark' : 'light';
+          // This site is intentionally locked to the dark cyber-security theme.
+          root.dataset.theme = 'dark';
           root.classList.toggle('hide-aside', read('aside-status') === 'hide');
         };
         apply(document);
