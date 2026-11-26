@@ -43,4 +43,5 @@ jobs:
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           SOURCE: "dist/"
           TARGET: ${{ secrets.TARGET_DIR }}
-          ARGS: "-rlgoDzvc -i --delete -o StrictHostKeyChecking=no"
+          # These are rsync options; SSH options must not be placed in ARGS.
+          ARGS: "-rlgoDzvc --delete"
